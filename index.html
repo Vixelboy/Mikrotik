@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MikroTik Academy — SMK Banjar Asri Cimaung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #007BFF; /* Biru Cerah */
+    --primary-dark: #0056b3;
+    --primary-light: #e6f2ff;
+    --accent: #9ACD32; /* Hijau Kekuningan (YellowGreen) */
+    --accent-dark: #76a020;
+    --bg-main: #F4F7F6;
+    --bg-card: #FFFFFF;
+    --text-dark: #1E293B;
+    --text-gray: #475569;
+    --text-light: #64748B;
+    --border: #E2E8F0;
+    --mono: 'Fira Code', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg-main);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .nav-logos {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-logos img {
+    height: 40px;
+    object-fit: contain;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--primary); }
+
+  .nav-cta {
+    background: var(--primary);
+    color: #fff !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    transition: background 0.2s !important;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  }
+
+  .nav-cta:hover { background: var(--primary-dark) !important; color: #fff !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 100%);
+  }
+
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 123, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 123, 255, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(154, 205, 50, 0.15);
+    border: 1px solid var(--accent);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--primary);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--primary);
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid var(--primary);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { background: var(--primary-light); }
+
+  /* Hero Visual */
+  .hero-visual {
+    position: relative;
+  }
+
+  .terminal {
+    background: #1e1e1e; /* Keep terminal dark for realism */
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .terminal-bar {
+    background: #2d2d2d;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; }
+  .dot-y { background: #FEBC2E; }
+  .dot-g { background: #28C840; }
+
+  .terminal-title {
+    margin-left: auto;
+    margin-right: auto;
+    color: #888;
+    font-size: 0.72rem;
+  }
+
+  .terminal-body {
+    padding: 1.2rem;
+    line-height: 1.9;
+  }
+
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: #fff; }
+  .t-out { color: #888; }
+  .t-out2 { color: #90CDF4; }
+  .t-comment { color: #555; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  }
+
+  .stat-num {
+    font-family: var(--sans);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary);
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+    font-weight: 500;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-gray);
+    max-width: 600px;
+    font-weight: 400;
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-gray);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p strong { color: var(--text-dark); font-weight: 600; }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-gray);
+  }
+
+  .feature-list li i {
+    color: var(--accent);
+    font-size: 1rem;
+    margin-top: 0.2rem;
+  }
+
+  /* Products */
+  .product-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .product-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .product-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  }
+
+  .product-icon {
+    width: 48px; height: 48px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .product-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--text-dark);
+  }
+
+  .product-card p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+  }
+
+  /* ── MODULES ── */
+  .modules-section {
+    background: #fff;
+    padding: 6rem 2rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modules-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .module-card {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .module-card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transform: translateY(-3px);
+  }
+
+  .module-header {
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .module-num {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .module-badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .badge-beginner { background: #d1fae5; color: #059669; }
+  .badge-inter { background: #dbeafe; color: #2563eb; }
+  .badge-advanced { background: #fee2e2; color: #dc2626; }
+
+  .module-body { padding: 1.2rem 1.4rem; }
+
+  .module-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+  }
+
+  .module-card p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .module-topics {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .module-topics li {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .module-topics li i {
+    color: var(--accent);
+    font-size: 0.7rem;
+  }
+
+  .module-footer {
+    padding: 1rem 1.4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+  }
+
+  .module-meta {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  .module-link {
+    font-size: 0.9rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .module-link:hover { text-decoration: underline; }
+
+  /* ── LEARNING PATH ── */
+  .path-section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .path-track {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    margin-top: 3rem;
+  }
+
+  .path-track::before {
+    content: '';
+    position: absolute;
+    left: 2rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .path-step {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 1.5rem 0;
+    position: relative;
+  }
+
+  .path-num {
+    width: 4rem;
+    height: 4rem;
+    background: #fff;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    flex-shrink: 0;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .path-content {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    flex: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .path-content:hover { border-color: var(--primary); box-shadow: 0 8px 16px rgba(0,123,255,0.08); }
+
+  .path-content h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+  }
+
+  .path-content p {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+  }
+
+  .path-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    background: var(--bg-main);
+    border-radius: 4px;
+    color: var(--text-light);
+    font-weight: 600;
+  }
+
+  /* ── LAB ── */
+  .lab-section {
+    background: #fff;
+    padding: 6rem 2rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lab-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .lab-topology {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+
+  .topo-title {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .topo-svg { width: 100%; }
+
+  .lab-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .lab-feat {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .lab-feat-icon {
+    width: 48px; height: 48px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .lab-feat h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    color: var(--text-dark);
+  }
+
+  .lab-feat p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+  }
+
+  /* ── CERT ── */
+  .cert-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .cert-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cert-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+  }
+
+  .cert-logo {
+    width: 64px; height: 64px;
+    background: var(--bg-main);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem;
+    font-size: 1.8rem;
+  }
+
+  .cert-card h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+  }
+
+  .cert-card p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-box {
+    background: var(--primary);
+    border-radius: 12px;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    box-shadow: 0 20px 40px rgba(0,123,255,0.2);
+  }
+
+  .cta-box .section-tag { color: rgba(255,255,255,0.8); }
+  .cta-box h2 { color: #fff; }
+  .cta-box p { color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 2rem; }
+  
+  .cta-box .btn-primary {
+    background: #fff;
+    color: var(--primary);
+  }
+  .cta-box .btn-primary:hover { background: var(--bg-main); }
+  
+  .cta-box .btn-secondary {
+    border-color: rgba(255,255,255,0.4);
+    color: #fff;
+    background: transparent;
+  }
+  .cta-box .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #fff;
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-logo img {
+    height: 32px;
+    object-fit: contain;
+    margin-right: 10px;
+  }
+
+  footer p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .hero-content, .about-grid, .lab-inner { grid-template-columns: 1fr; }
+    .modules-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.2rem; }
+    .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * { animation: fadeUp 0.6s ease both; }
+  .hero-badge { animation-delay: 0.1s; }
+  h1 { animation-delay: 0.2s; }
+  .hero-desc { animation-delay: 0.3s; }
+  .hero-btns { animation-delay: 0.4s; }
+  .hero-visual { animation: fadeUp 0.8s ease 0.5s both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logos">
+    <img src="./logo-mikrotik.png" alt="MikroTik Logo">
+    <img src="./logo-smk.png" alt="SMK Banjar Asri Logo">
+  </div>
+  <ul>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#modul">Modul</a></li>
+    <li><a href="#pembelajaran">Jalur Belajar</a></li>
+    <li><a href="#lab">Lab Cisco</a></li>
+    <li><a href="#sertifikasi">Sertifikasi</a></li>
+    <li><a href="#daftar" class="nav-cta">Mulai Belajar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge"><i class="fas fa-check-circle"></i> MikroTik Academy SMK Banjar Asri</div>
+      <h1>Kuasai <em>Jaringan</em> dari Nol Hingga Ahli</h1>
+      <p class="hero-desc">
+        Pelajari konfigurasi router, firewall, VPN, dan manajemen jaringan dengan kurikulum resmi MikroTik. Tersedia modul, lab simulasi, dan panduan akademik lengkap.
+      </p>
+      <div class="hero-btns">
+        <a href="#modul" class="btn-primary">Lihat Kurikulum <i class="fas fa-arrow-right"></i></a>
+        <a href="#lab" class="btn-secondary">Coba Lab Gratis</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <span class="terminal-title">RouterOS v7.x — Terminal</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-prompt">[admin@MikroTik] ></span> <span class="t-cmd">ip address print</span></div>
+          <div><span class="t-out">Flags: X - disabled, I - invalid, D - dynamic</span></div>
+          <div><span class="t-out2"> 0 D 192.168.88.1/24 ether1</span></div>
+          <div><span class="t-out2"> 1   10.0.0.1/30    ether2-WAN</span></div>
+          <br>
+          <div><span class="t-prompt">[admin@MikroTik] ></span> <span class="t-cmd">queue simple add</span></div>
+          <div><span class="t-out2">  name=LimitUser max-limit=2M/2M</span></div>
+          <div><span class="t-comment"># Bandwidth management aktif ✓</span></div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Siswa Aktif</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">48</div>
+          <div class="stat-label">Modul Materi</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">MTCNA</div>
+          <div class="stat-label">Sertifikasi Resmi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TENTANG MIKROTIK -->
+<section id="tentang">
+  <div class="about-grid">
+    <div>
+      <div class="section-tag">01 — Pengenalan</div>
+      <h2>Tentang <em style="color:var(--primary); font-style:normal;">MikroTik</em></h2>
+      <div class="about-text">
+        <p><strong>MikroTik</strong> adalah produsen perangkat lunak dan perangkat keras jaringan dari Latvia yang berfokus pada pengembangan router dan sistem ISP.</p>
+        <p>Produk utamanya adalah <strong>RouterOS</strong>, sistem operasi yang mampu menyulap perangkat menjadi router tangguh dengan fitur enterprise seperti routing dinamis, firewall, manajemen bandwidth, hingga VPN dan hotspot.</p>
+        <p>Berkat kombinasi fitur yang sangat lengkap dan harga yang terjangkau, MikroTik kini menjadi standar industri yang banyak digunakan oleh ISP, perusahaan, hingga institusi pendidikan di seluruh dunia.</p>
+      </div>
+    </div>
+    <div>
+      <ul class="feature-list">
+        <li><i class="fas fa-check"></i> Kurikulum resmi dari MikroTik Eropa</li>
+        <li><i class="fas fa-check"></i> Praktik langsung menggunakan RouterBOARD</li>
+        <li><i class="fas fa-check"></i> Modul interaktif dan video pembelajaran</li>
+        <li><i class="fas fa-check"></i> Akses lab simulasi berbasis Cloud (EVE-NG/GNS3)</li>
+        <li><i class="fas fa-check"></i> Kesempatan ujian Sertifikasi Internasional (MTCNA)</li>
+      </ul>
+
+      <div class="product-cards">
+        <div class="product-card">
+          <div class="product-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Keamanan (Firewall)</h3>
+          <p>Pelajari cara memfilter paket, NAT, dan menjaga jaringan dari serangan luar.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon"><i class="fas fa-tachometer-alt"></i></div>
+          <h3>Manajemen Bandwidth</h3>
+          <p>Pengaturan kecepatan internet menggunakan Simple Queue & Queue Tree.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon"><i class="fas fa-wifi"></i></div>
+          <h3>Hotspot & Wireless</h3>
+          <p>Membangun sistem login voucher dan jaringan WiFi skala enterprise.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon"><i class="fas fa-lock"></i></div>
+          <h3>Koneksi VPN</h3>
+          <p>Membuat jalur aman (tunneling) untuk remote akses menggunakan PPTP/L2TP/OpenVPN.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODUL -->
+<div class="modules-section" id="modul">
+  <div class="modules-inner">
+    <div class="section-tag">02 — Kurikulum & Akademik</div>
+    <h2>Modul <em style="color:var(--primary); font-style:normal;">Pembelajaran</em></h2>
+    <p class="section-desc">Materi dirancang secara berjenjang untuk memastikan pemahaman teori dan kemampuan praktik yang solid.</p>
+
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-num">MOD-01</span>
+          <span class="module-badge badge-beginner">Dasar</span>
+        </div>
+        <div class="module-body">
+          <h3>Pengantar Jaringan Komputer</h3>
+          <p>Pahami konsep dasar IP Address, Subnetting, dan model OSI Layer sebelum menyentuh perangkat MikroTik.</p>
+          <ul class="module-topics">
+            <li><i class="fas fa-circle"></i> Topologi & OSI Layer</li>
+            <li><i class="fas fa-circle"></i> Subnetting IPv4</li>
+            <li><i class="fas fa-circle"></i> Pengenalan Perangkat Jaringan</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-meta"><i class="fas fa-book"></i> 5 Bab Materi</span>
+          <a href="#" class="module-link">Buka Modul <i class="fas fa-angle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-num">MOD-02</span>
+          <span class="module-badge badge-beginner">Dasar</span>
+        </div>
+        <div class="module-body">
+          <h3>Basic RouterOS & Winbox</h3>
+          <p>Langkah pertama mengakses router MikroTik, pengaturan user, reset, dan backup konfigurasi.</p>
+          <ul class="module-topics">
+            <li><i class="fas fa-circle"></i> Instalasi & Akses Winbox</li>
+            <li><i class="fas fa-circle"></i> Manajemen User & Password</li>
+            <li><i class="fas fa-circle"></i> Backup & Restore File</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-meta"><i class="fas fa-book"></i> 4 Bab Materi</span>
+          <a href="#" class="module-link">Buka Modul <i class="fas fa-angle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-num">MOD-03</span>
+          <span class="module-badge badge-inter">Menengah</span>
+        </div>
+        <div class="module-body">
+          <h3>Internet Gateway & DHCP</h3>
+          <p>Cara menghubungkan router ke internet dan membagikan koneksi ke klien menggunakan DHCP Server dan NAT.</p>
+          <ul class="module-topics">
+            <li><i class="fas fa-circle"></i> Setting DHCP Client & Server</li>
+            <li><i class="fas fa-circle"></i> Konfigurasi NAT Masquerade</li>
+            <li><i class="fas fa-circle"></i> DNS Static & Cache</li>
+          </ul>
+        </div>
+        <div class="module-footer">
+          <span class="module-meta"><i class="fas fa-book"></i> 6 Bab Materi</span>
+          <a href="#" class="module-link">Buka Modul <i class="fas fa-angle-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- JALUR PEMBELAJARAN -->
+<section id="pembelajaran" class="path-section">
+  <div class="section-tag">03 — Roadmap</div>
+  <h2>Jalur <em style="color:var(--primary); font-style:normal;">Akademik & Tutorial</em></h2>
+  <p class="section-desc">Tahapan pembelajaran yang akan dilalui siswa selama menempuh pendidikan di kompetensi keahlian Jaringan.</p>
+
+  <div class="path-track">
+
+    <div class="path-step">
+      <div class="path-num">1</div>
+      <div class="path-content">
+        <h3>Kelas 10: Fondasi IT & Jaringan Dasar</h3>
+        <p>Pengenalan perangkat keras komputer, sistem operasi, kabel jaringan (UTP/Fiber Optic), dan logika dasar jaringan (LAN).</p>
+        <div class="path-tags">
+          <span class="tag">Perakitan Komputer</span>
+          <span class="tag">Kabel UTP</span>
+          <span class="tag">Sistem Operasi Dasar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="path-step">
+      <div class="path-num">2</div>
+      <div class="path-content">
+        <h3>Kelas 11: Administrasi Infrastruktur & Routing</h3>
+        <p>Mulai masuk ke materi MikroTik Academy (MTCNA). Praktik menghubungkan jaringan, konfigurasi router, firewall dasar, hingga pembuatan hotspot sekolah.</p>
+        <div class="path-tags">
+          <span class="tag">Routing</span>
+          <span class="tag">Firewall</span>
+          <span class="tag">VLAN</span>
+          <span class="tag">Hotspot</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="path-step">
+      <div class="path-num">3</div>
+      <div class="path-content">
+        <h3>Kelas 12: Troubleshooting & Persiapan Sertifikasi</h3>
+        <p>Praktik penyelesaian masalah jaringan yang kompleks, simulasi Uji Kompetensi Keahlian (UKK), dan pelaksanaan ujian sertifikasi MTCNA.</p>
+        <div class="path-tags">
+          <span class="tag">Troubleshooting</span>
+          <span class="tag">Ujian MTCNA</span>
+          <span class="tag">UKK Jaringan</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LAB CISCO -->
+<div class="lab-section" id="lab">
+  <div class="lab-inner">
+    <div>
+      <div class="section-tag">04 — Lab & Praktikum</div>
+      <h2>Lab <em style="color:var(--primary); font-style:normal;">Jaringan Virtual</em></h2>
+      <p style="color:var(--text-gray); font-size:1rem; margin-bottom:2rem; line-height:1.7;">
+        Selain alat fisik, SMK Banjar Asri memfasilitasi siswa dengan lab virtual menggunakan GNS3/EVE-NG untuk simulasi tanpa batas.
+      </p>
+
+      <div class="lab-features">
+        <div class="lab-feat">
+          <div class="lab-feat-icon"><i class="fas fa-laptop-code"></i></div>
+          <div>
+            <h4>Simulasi Topologi Kompleks</h4>
+            <p>Siswa dapat merancang topologi gabungan antara MikroTik dan Cisco tanpa perlu meminjam banyak alat fisik.</p>
+          </div>
+        </div>
+        <div class="lab-feat">
+          <div class="lab-feat-icon"><i class="fas fa-project-diagram"></i></div>
+          <div>
+            <h4>30+ Skenario Kasus Industri</h4>
+            <p>Latihan pemecahan masalah seperti di dunia kerja: routing dinamis, failover internet, dan VPN Antar Cabang.</p>
+          </div>
+        </div>
+        <div class="lab-feat">
+          <div class="lab-feat-icon"><i class="fas fa-cloud"></i></div>
+          <div>
+            <h4>Akses Remote (Online)</h4>
+            <p>Materi praktikum dan router virtual dapat diakses dari rumah melalui server sekolah.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lab-topology">
+      <div class="topo-title"><i class="fas fa-sitemap"></i> TOPOLOGI LAB PRAKTIKUM UTAMA</div>
+      <!-- Placeholder for Topology SVG -->
+      <svg class="topo-svg" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="160" cy="30" rx="50" ry="20" fill="#e6f2ff" stroke="#007BFF" stroke-width="1"/>
+        <text x="160" y="34" text-anchor="middle" fill="#007BFF" font-family="Fira Code" font-size="9">INTERNET</text>
+        <line x1="160" y1="50" x2="160" y2="75" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+        <rect x="110" y="75" width="100" height="38" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="160" y="90" text-anchor="middle" fill="#1e293b" font-family="Fira Code" font-size="8">MikroTik Router</text>
+        <text x="160" y="104" text-anchor="middle" fill="#64748b" font-family="Fira Code" font-size="7">Gateway Sekolah</text>
+        <line x1="130" y1="113" x2="90" y2="138" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="190" y1="113" x2="230" y2="138" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+        <rect x="40" y="138" width="100" height="36" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="90" y="152" text-anchor="middle" fill="#334155" font-family="Fira Code" font-size="8">Switch Distribusi</text>
+        <text x="90" y="165" text-anchor="middle" fill="#64748b" font-family="Fira Code" font-size="7">Lab TKJ 1</text>
+        <rect x="180" y="138" width="100" height="36" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="230" y="152" text-anchor="middle" fill="#334155" font-family="Fira Code" font-size="8">Switch Distribusi</text>
+        <text x="230" y="165" text-anchor="middle" fill="#64748b" font-family="Fira Code" font-size="7">Lab TKJ 2</text>
+        <line x1="65" y1="174" x2="50" y2="205" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="115" y1="174" x2="130" y2="205" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="200" y1="174" x2="185" y2="205" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="255" y1="174" x2="270" y2="205" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+        
+        <rect x="20" y="205" width="60" height="28" rx="3" fill="#ecfccb" stroke="#bef264" stroke-width="1"/>
+        <text x="50" y="222" text-anchor="middle" fill="#4d7c0f" font-family="Fira Code" font-size="7">Client PC</text>
+        
+        <rect x="100" y="205" width="60" height="28" rx="3" fill="#ecfccb" stroke="#bef264" stroke-width="1"/>
+        <text x="130" y="222" text-anchor="middle" fill="#4d7c0f" font-family="Fira Code" font-size="7">Client PC</text>
+        
+        <rect x="160" y="205" width="60" height="28" rx="3" fill="#ecfccb" stroke="#bef264" stroke-width="1"/>
+        <text x="190" y="222" text-anchor="middle" fill="#4d7c0f" font-family="Fira Code" font-size="7">Client PC</text>
+        
+        <rect x="240" y="205" width="60" height="28" rx="3" fill="#ecfccb" stroke="#bef264" stroke-width="1"/>
+        <text x="270" y="222" text-anchor="middle" fill="#4d7c0f" font-family="Fira Code" font-size="7">Access Point</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- SERTIFIKASI -->
+<section id="sertifikasi">
+  <div class="section-tag" style="text-align: center;">05 — Sertifikasi</div>
+  <h2 style="text-align: center;">Uji Sertifikasi <em style="color:var(--primary); font-style:normal;">Nasional & Internasional</em></h2>
+  <p class="section-desc" style="margin: 0 auto 3rem; text-align: center;">Lulusan SMK Banjar Asri didorong untuk memiliki sertifikasi keahlian sebagai bekal bersaing di dunia kerja.</p>
+
+  <div class="cert-cards">
+    <div class="cert-card">
+      <div class="cert-logo"><i class="fas fa-certificate"></i></div>
+      <h3>MTCNA MikroTik</h3>
+      <p>Sertifikat bertaraf internasional dari MikroTik Latvia sebagai bukti penguasaan dasar jaringan dan RouterOS.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo"><i class="fas fa-id-badge"></i></div>
+      <h3>UKK Jaringan (BSNP)</h3>
+      <p>Ujian Kompetensi Keahlian tingkat nasional yang diawasi oleh penguji eksternal dari industri.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-logo"><i class="fas fa-award"></i></div>
+      <h3>Sertifikat PKL / Magang</h3>
+      <p>Sertifikat pengalaman praktik kerja industri di berbagai perusahaan IT, ISP, dan instansi jaringan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="daftar">
+  <div class="cta-box">
+    <div class="section-tag" style="justify-content:center; display:flex;">Bergabung Bersama Kami</div>
+    <h2>Siap Menjadi Ahli IT<br>Bersama <em>SMK Banjar Asri?</em></h2>
+    <p>Akses semua modul, tutorial, dan bimbingan praktik langsung bersama instruktur yang tersertifikasi.</p>
+    <div class="hero-btns" style="justify-content:center;">
+      <a href="#" class="btn-primary">Akses Portal Siswa <i class="fas fa-sign-in-alt"></i></a>
+      <a href="#modul" class="btn-secondary">Lihat Panduan Pendaftaran</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="./logo-mikrotik.png" alt="MikroTik">
+      <img src="./logo-smk.png" alt="SMK Banjar Asri">
+    </div>
+    <p>© 2026 SMK Banjar Asri Cimaung · Teknik Komputer dan Jaringan</p>
+    <div style="font-size:0.85rem; color:var(--text-light);">
+      <a href="#" style="color:var(--text-gray); text-decoration:none; margin-left:15px;"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="#" style="color:var(--text-gray); text-decoration:none; margin-left:15px;"><i class="fab fa-youtube"></i> YouTube</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
